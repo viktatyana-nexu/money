@@ -3,42 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viktanya — Финансовый Хаб</title>
+    <title>💎 VIKTANYA HUB 💎</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #000; overflow-x: hidden; }
-        .nav-panel { position: fixed; top: 0; width: 100%; background: rgba(17,17,17,0.95); padding: 15px 0; text-align: center; z-index: 999; border-bottom: 1px solid #333; }
-        .back-btn { background: #f39c12; color: white; padding: 12px 40px; border-radius: 50px; cursor: pointer; border: none; font-size: 1.2em; font-weight: bold; box-shadow: 0 0 20px rgba(243,156,18,0.5); }
-        #main-container { width: 100%; min-height: 100vh; margin-top: 70px; background: #fff; }
-        #money-grid-modal { display:flex; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:10000; justify-content:center; align-items:center; backdrop-filter: blur(15px); transition: 0.6s; }
-        .modal-content { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; width: 95%; }
-        .grid-btn, .loan-btn { position: relative; display:flex; justify-content:center; align-items:center; height:150px; text-decoration:none; border-radius:25px; font-weight:900; font-size:1.8em; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
-        .alfa { background: linear-gradient(135deg, #ff4b2b, #ff0000); color: white; }
-        .vtb { background: linear-gradient(135deg, #00d2ff, #0072ff); color: white; }
-        .tbank { background: linear-gradient(135deg, #fff275, #ffdd2d); color: #000; }
-        .sber { background: linear-gradient(135deg, #56ab2f, #21a038); color: white; }
-        .loan-btn { grid-column: span 2; height: 120px; background: linear-gradient(135deg, #a55eea, #6c5ce7); color: white; }
-        .fade-out { opacity: 0; pointer-events: none; }
+        body { margin: 0; padding: 0; background: #002b2b; font-family: 'Segoe UI', sans-serif; color: white; overflow-x: hidden; }
+        .malachite-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle, #006666 0%, #002b2b 100%); }
+        
+        /* ГЛАВНОЕ МЕНЮ (ШТОРКА) */
+        #hub-main { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(0, 20, 20, 0.96); }
+        .slide-up { transform: translateY(-100%); }
+
+        .modal-content { display: flex; flex-direction: column; gap: 20px; width: 90%; max-width: 500px; }
+        .big-card { height: 140px; border-radius: 35px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.4s; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 2px solid rgba(255, 255, 255, 0.3); font-weight: 900; font-size: 2em; text-shadow: 0 0 10px #fff; }
+        .big-card:hover { transform: scale(1.03); border-color: #d4af37; box-shadow: 0 0 30px rgba(212,175,55,0.4); }
+
+        /* ВЕРХНЯЯ ПАНЕЛЬ ВОЗВРАТА */
+        .nav-panel { position: fixed; top: -85px; width: 100%; background: #000; padding: 15px 0; text-align: center; z-index: 9999; border-bottom: 2px solid #d4af37; transition: 0.5s; }
+        .show-nav { top: 0 !important; }
+        .back-btn { background: #d4af37; color: #000; padding: 12px 40px; border-radius: 50px; border: 1px solid #fff; font-weight: bold; cursor: pointer; }
+
+        /* СЕКЦИИ С ТВОИМ ДИЗАЙНОМ */
+        .section { display: none; padding-top: 110px; width: 100%; min-height: 100vh; }
+        .active { display: block; }
+
+        /* ДИЗАЙН "ДЕНЬГИ" (БАНКИ) */
+        .bank-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .bank-btn { height: 160px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.8em; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: 0.3s; border: 1px solid rgba(255,255,255,0.2); }
+        .bank-btn:hover { transform: translateY(-5px); filter: brightness(1.2); }
+        .alfa { background: #ff0000; color: white; }
+        .vtb { background: #0072ff; color: white; }
+        .tbank { background: #ffdd2d; color: #000; }
+        .sber { background: #21a038; color: white; }
+
+        /* ДИЗАЙН "РАБОТА" (МЕТАЛЛ) */
+        .pro-container { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; padding: 20px; }
+        .pro-btn { height: 180px; border-radius: 45px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 2em; background: linear-gradient(135deg, #fff, #b0b0b0, #fff); color: #111; text-decoration: none; border: 2px solid #555; transition: 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .pro-btn:hover { transform: scale(1.02); box-shadow: 0 0 40px rgba(255,255,255,0.4); }
     </style>
 </head>
 <body>
-    <div class="nav-panel"><button class="back-btn" onclick="resetMenu()">🏠 ВЫБРАТЬ ДРУГОЙ БАНК</button></div>
-    <div id="main-container">
-        <iframe src="https://ppdu.ru" style="width: 100%; border: none; min-height: 1000px;" id="ppdwiOffer" scrolling="no"></iframe>
-        <script src="https://b2c.pampadu.ru"></script>
-    </div>
-    <div id="money-grid-modal">
+    <div class="malachite-bg"></div>
+    <div id="nav" class="nav-panel"><button class="back-btn" onclick="goHome()">🏠 ГЛАВНОЕ МЕНЮ HUB</button></div>
+
+    <div id="hub-main">
+        <h1 style="font-size: 2.5em; margin-bottom: 40px; letter-spacing: 5px; text-shadow: 0 0 20px #fff;">💎 VIKTANYA HUB 💎</h1>
         <div class="modal-content">
-            <h2 style="grid-column: span 2; color: white; text-align: center; font-size: 2em; letter-spacing: 3px;">VIKTANYA MONEY</h2>
-            <div onclick="animateExit()" class="grid-btn alfa">АЛЬФА</div>
-            <div onclick="animateExit()" class="grid-btn vtb">ВТБ</div>
-            <div onclick="animateExit()" class="grid-btn tbank">Т-БАНК</div>
-            <div onclick="animateExit()" class="grid-btn sber">СБЕР</div>
-            <div onclick="animateExit()" class="loan-btn">ЗАЙМЫ 0%</div>
+            <div class="big-card" onclick="openSection('money')">💰 ДЕНЬГИ</div>
+            <div class="big-card" onclick="openSection('pro')">🏃 РАБОТА</div>
+            <div class="big-card" onclick="openSection('build')">🧱 СТРОЙКА</div>
         </div>
     </div>
+
+    <!-- ТВОЯ ДИЗАЙН-СТРАНИЦА "ДЕНЬГИ" -->
+    <div id="sec-money" class="section">
+        <div class="bank-grid">
+            <a href="https://ppdu.ru" class="bank-btn alfa">АЛЬФА</a>
+            <a href="https://ppdu.ru" class="bank-btn vtb">ВТБ</a>
+            <a href="https://ppdu.ru" class="bank-btn tbank">Т-БАНК</a>
+            <a href="https://ppdu.ru" class="bank-btn sber">СБЕР</a>
+            <a href="https://ppdu.ru" class="bank-btn" style="grid-column: span 2; background: #6c5ce7; color: #fff;">ЗАЙМЫ 0%</a>
+        </div>
+    </div>
+
+    <!-- ТВОЯ ДИЗАЙН-СТРАНИЦА "РАБОТА" -->
+    <div id="sec-pro" class="section">
+        <div class="pro-container">
+            <a href="https://ppdu.ru" class="pro-btn">🏃 НАЙТИ РАБОТУ</a>
+            <a href="https://ppdu.ru" class="pro-btn">💼 БИЗНЕС 0₽</a>
+        </div>
+    </div>
+
+    <!-- СЕКЦИЯ "СТРОЙКА" -->
+    <div id="sec-build" class="section">
+        <div class="pro-container">
+            <a href="https://ppdu.ru" class="pro-btn" style="background: #008b8b; color: #fff; border-color: #d4af37;">🧱 СТРОЙМАТЕРИАЛЫ</a>
+        </div>
+    </div>
+
     <script>
-        function animateExit() { document.getElementById('money-grid-modal').classList.add('fade-out'); setTimeout(() => { document.getElementById('money-grid-modal').style.display = 'none'; }, 600); }
-        function resetMenu() { const modal = document.getElementById('money-grid-modal'); modal.style.display = 'flex'; modal.classList.remove('fade-out'); }
+        function openSection(id) {
+            document.getElementById('hub-main').classList.add('slide-up');
+            document.getElementById('nav').classList.add('show-nav');
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('sec-' + id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+        function goHome() {
+            document.getElementById('hub-main').classList.remove('slide-up');
+            document.getElementById('nav').classList.remove('show-nav');
+        }
     </script>
 </body>
 </html>
