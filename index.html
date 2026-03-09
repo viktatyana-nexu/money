@@ -3,22 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💰 КЭШБЭК ХАБ — VIKTANYA 💰</title>
+    <title>Viktanya — Финансовый Хаб</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #001a00; display:flex; justify-content:center; align-items:center; min-height: 100vh; color: #00ff00; }
-        .content { text-align: center; border: 2px solid #00ff00; padding: 40px; border-radius: 30px; background: #000; box-shadow: 0 0 30px rgba(0, 255, 0, 0.2); }
-        .btn { display:block; margin: 15px auto; padding: 15px 30px; color:black; background: #00ff00; text-decoration:none; border-radius:10px; font-weight:bold; text-transform: uppercase; }
-        .btn:hover { filter: brightness(1.2); transform: scale(1.05); transition: 0.3s; }
-        h1 { font-size: 2.5em; text-shadow: 0 0 10px #00ff00; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #000; overflow-x: hidden; }
+        .nav-panel { position: fixed; top: 0; width: 100%; background: rgba(17,17,17,0.95); padding: 15px 0; text-align: center; z-index: 999; border-bottom: 1px solid #333; }
+        .back-btn { background: #f39c12; color: white; padding: 12px 40px; border-radius: 50px; cursor: pointer; border: none; font-size: 1.2em; font-weight: bold; box-shadow: 0 0 20px rgba(243,156,18,0.5); }
+        #main-container { width: 100%; min-height: 100vh; margin-top: 70px; background: #fff; }
+        #money-grid-modal { display:flex; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:10000; justify-content:center; align-items:center; backdrop-filter: blur(15px); transition: 0.6s; }
+        .modal-content { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; width: 95%; }
+        .grid-btn, .loan-btn { position: relative; display:flex; justify-content:center; align-items:center; height:150px; text-decoration:none; border-radius:25px; font-weight:900; font-size:1.8em; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+        .alfa { background: linear-gradient(135deg, #ff4b2b, #ff0000); color: white; }
+        .vtb { background: linear-gradient(135deg, #00d2ff, #0072ff); color: white; }
+        .tbank { background: linear-gradient(135deg, #fff275, #ffdd2d); color: #000; }
+        .sber { background: linear-gradient(135deg, #56ab2f, #21a038); color: white; }
+        .loan-btn { grid-column: span 2; height: 120px; background: linear-gradient(135deg, #a55eea, #6c5ce7); color: white; }
+        .fade-out { opacity: 0; pointer-events: none; }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>💰 КЭШБЭК И БОНУСЫ</h1>
-        <p style="color: white;">Лучшие предложения от банков и сервисов</p>
-        <a href="https://viktanya.ru" class="btn">🏠 Вернуться на ГЛАВНУЮ</a>
-        <a href="#" class="btn" style="background:#ffcc00">🏦 Кэшбэк Т-Банк</a>
-        <a href="#" class="btn" style="background:#ff4400">🔴 Кэшбэк Альфа</a>
+    <div class="nav-panel"><button class="back-btn" onclick="resetMenu()">🏠 ВЫБРАТЬ ДРУГОЙ БАНК</button></div>
+    <div id="main-container">
+        <iframe src="https://ppdu.ru" style="width: 100%; border: none; min-height: 1000px;" id="ppdwiOffer" scrolling="no"></iframe>
+        <script src="https://b2c.pampadu.ru"></script>
     </div>
+    <div id="money-grid-modal">
+        <div class="modal-content">
+            <h2 style="grid-column: span 2; color: white; text-align: center; font-size: 2em; letter-spacing: 3px;">VIKTANYA MONEY</h2>
+            <div onclick="animateExit()" class="grid-btn alfa">АЛЬФА</div>
+            <div onclick="animateExit()" class="grid-btn vtb">ВТБ</div>
+            <div onclick="animateExit()" class="grid-btn tbank">Т-БАНК</div>
+            <div onclick="animateExit()" class="grid-btn sber">СБЕР</div>
+            <div onclick="animateExit()" class="loan-btn">ЗАЙМЫ 0%</div>
+        </div>
+    </div>
+    <script>
+        function animateExit() { document.getElementById('money-grid-modal').classList.add('fade-out'); setTimeout(() => { document.getElementById('money-grid-modal').style.display = 'none'; }, 600); }
+        function resetMenu() { const modal = document.getElementById('money-grid-modal'); modal.style.display = 'flex'; modal.classList.remove('fade-out'); }
+    </script>
 </body>
 </html>
