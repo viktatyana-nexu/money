@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIKTANYA PRO — Работа и Бизнес</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #000; overflow-x: hidden; }
+        .nav-panel { position: fixed; top: 0; width: 100%; background: #000; padding: 15px 0; text-align: center; z-index: 999; border-bottom: 2px solid #222; }
+        .back-btn { background: #f39c12; color: white; padding: 12px 40px; border-radius: 50px; cursor: pointer; border: none; font-weight: bold; box-shadow: 0 0 20px rgba(243, 156, 18, 0.5); }
+        #main-container { width: 100%; min-height: 100vh; margin-top: 70px; background: #fff; }
+        #pro-modal { display:flex; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0, 0, 0, 0.95); z-index:10000; justify-content:center; align-items:center; backdrop-filter: blur(20px); transition: 0.6s; }
+        .modal-content { display: flex; flex-direction: column; gap: 30px; max-width: 500px; width: 92%; text-align: center; }
+        .pro-btn { position: relative; display:flex; flex-direction:column; justify-content:center; align-items:center; height:180px; color:#111; text-decoration:none; border-radius:40px; font-weight:900; font-size:2em; background: linear-gradient(135deg, #fff 0%, #b0b0b0 50%, #fff 100%); border: 2px solid #555; cursor: pointer; }
+        .pro-btn span.subtext { font-size: 0.4em; margin-top: 10px; color: #222; letter-spacing: 2px; }
+        .fade-out { opacity: 0; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <div class="nav-panel"><button class="back-btn" onclick="resetMenu()">🏠 ВЫБРАТЬ НАПРАВЛЕНИЕ</button></div>
+    <div id="main-container">
+        <iframe src="https://ppdu.ru/226ab3b2-cdca-45bc-a2dc-575ef0c68693" style="width: 100%; border: none; min-height: 1000px;" id="ppdwiOffer" scrolling="no"></iframe>
+        <script src="https://b2c.pampadu.ru/ppdw.js"></script>
+    </div>
+    <div id="pro-modal">
+        <div class="modal-content">
+            <h1 style="color:white; text-transform:uppercase; letter-spacing:5px;">Viktanya Pro</h1>
+            <div onclick="animateExit()" class="pro-btn">🏃 НАЙТИ РАБОТУ <span class="subtext">З/П ОТ 100 000 ₽</span></div>
+            <div onclick="animateExit()" class="pro-btn">💼 ОТКРЫТЬ БИЗНЕС <span class="subtext">РЕГИСТРАЦИЯ ИП И СЧЕТА 0₽</span></div>
+        </div>
+    </div>
+    <script>
+        function animateExit() { document.getElementById('pro-modal').classList.add('fade-out'); setTimeout(() => { document.getElementById('pro-modal').style.display = 'none'; }, 600); }
+        function resetMenu() { const modal = document.getElementById('pro-modal'); modal.style.display = 'flex'; modal.classList.remove('fade-out'); }
+    </script>
+</body>
+</html>
